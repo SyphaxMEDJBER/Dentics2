@@ -9,19 +9,18 @@ class Connexion {
 
     public static function getConnexion(): PDO {
         if (self::$connexion === null) {
-            $host = 'pedago.univ-avignon.fr';
-            $dbname = 'etd';
-            $user = 'uapv2500230';
-            $password = 'f23WdW'; // ou un .env plus tard
-
             try {
+                $host = 'pedago.univ-avignon.fr';
+                $dbname = 'etd';
+                $user = 'uapv2500230';
+                $password = 'f23WdW';
+
                 self::$connexion = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
                 self::$connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch (PDOException $e) {
-                die("Erreur de connexion à la base : " . $e->getMessage());
+                die("Erreur de connexion : " . $e->getMessage());
             }
         }
         return self::$connexion;
     }
 }
-
