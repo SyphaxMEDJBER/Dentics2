@@ -1,0 +1,13 @@
+# Fichiers temporaires
+*.log
+*.tmp
+*.bak
+
+# Dossiers à ignorer
+node_modules/
+vendor/
+.env
+.DS_Store
+
+# Fichiers spécifiques à VSCode
+.vscode/
