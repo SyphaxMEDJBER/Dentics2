@@ -2,7 +2,8 @@
 namespace Admin\Model;
 
 require_once 'ConnexionDB.php';
-require_once 'MessageContact.php';
+require_once __DIR__ . '/../class/MessageContact.php';
+
 
 use PDO;
 

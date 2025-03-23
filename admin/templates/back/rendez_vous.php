@@ -1,47 +1,57 @@
-<?php include 'header.php'; ?>
+<?php
+session_start();
+require_once __DIR__ . '/../../model/RendezVousManager.php';
+require_once __DIR__ . '/../../class/RendezVous.php';
+
+use Admin\Model\RendezVousManager;
+
+include 'header.php';
+
+$manager = new RendezVousManager();
+$rdvs = $manager->getAll();
+?>
 
 <main>
     <section class="appointments-container">
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Patient</th>
-                    <th>Dentiste</th>
-                    <th>Date</th>
-                    <th>Heure</th>
-                    <th>Statut</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Jean Dupont</td>
-                    <td>Dr. Martin</td>
-                    <td>12/03/2024</td>
-                    <td>10:00</td>
-                    <td class="status pending">En attente</td>
-                    <td>
-                        <button class="confirm-btn" onclick="confirmAppointment(this)">Confirmer</button>
-                        <button class="cancel-btn" onclick="cancelAppointment(this)">Annuler</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Marie Curie</td>
-                    <td>Dr. Bernard</td>
-                    <td>15/03/2024</td>
-                    <td>14:30</td>
-                    <td class="status confirmed">Confirmé</td>
-                    <td>
-                        <button class="cancel-btn" onclick="cancelAppointment(this)">Annuler</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <h1>Liste des Rendez-vous</h1>
+        <?php if (empty($rdvs)): ?>
+            <p>Aucun rendez-vous trouvé.</p>
+        <?php else: ?>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Email</th>
+                        <th>Téléphone</th>
+                        <th>Dentiste</th>
+                        <th>Date</th>
+                        <th>Heure</th>
+                        <th>Statut</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($rdvs as $rdv): ?>
+                        <tr>
+                            <td><?= $rdv->__get('id_rdv') ?></td>
+                            <td><?= htmlspecialchars($rdv->__get('nom')) ?></td>
+                            <td><?= htmlspecialchars($rdv->__get('email')) ?></td>
+                            <td><?= htmlspecialchars($rdv->__get('telephone')) ?></td>
+                            <td><?= $rdv->__get('id_dentist') ?></td>
+                            <td><?= $rdv->__get('date_rdv') ?></td>
+                            <td><?= $rdv->__get('heure_rdv') ?></td>
+                            <td><?= $rdv->__get('statut') ?></td>
+                            <td>
+                                <a href="../../control/rendez_vous_control.php?action=confirmer&id=<?= $rdv->__get('id_rdv') ?>">✔️</a>
+                                <a href="../../control/rendez_vous_control.php?action=annuler&id=<?= $rdv->__get('id_rdv') ?>">🗑</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php endif; ?>
     </section>
 </main>
 
-<script src="js/script.js"></script>
 <?php include 'footer.php'; ?>

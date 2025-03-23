@@ -1,4 +1,5 @@
 <?php
+
 namespace Admin\Model;
 
 class RendezVous {
@@ -9,8 +10,9 @@ class RendezVous {
     private int $id_dentist;
     private string $date_rdv;
     private string $heure_rdv;
+    private string $statut; // <-- Ajouté
 
-    public function __construct($id_rdv = 0, $nom = "", $email = "", $telephone = "", $id_dentist = 0, $date_rdv = "", $heure_rdv = "") {
+    public function __construct($id_rdv = 0, $nom = "", $email = "", $telephone = "", $id_dentist = 0, $date_rdv = "", $heure_rdv = "", $statut = "en attente") {
         $this->id_rdv = $id_rdv;
         $this->nom = $nom;
         $this->email = $email;
@@ -18,6 +20,7 @@ class RendezVous {
         $this->id_dentist = $id_dentist;
         $this->date_rdv = $date_rdv;
         $this->heure_rdv = $heure_rdv;
+        $this->statut = $statut; // <-- Ajouté
     }
 
     public function __get($prop) {
@@ -31,6 +34,6 @@ class RendezVous {
     }
 
     public function __toString(): string {
-        return "RDV {$this->id_rdv} - {$this->nom} ({$this->email}) le {$this->date_rdv} à {$this->heure_rdv}";
+        return "RDV {$this->id_rdv} - {$this->nom} ({$this->email}) le {$this->date_rdv} à {$this->heure_rdv} - Statut : {$this->statut}";
     }
 }
