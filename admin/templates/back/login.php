@@ -2,7 +2,6 @@
 session_start();
 require_once __DIR__ . '/../../model/ConnexionDB.php';
 
-
 use Admin\Model\ConnexionDB;
 
 $error = "";
@@ -17,7 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->execute(['email' => $email]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Vérification simple (sans hash)
     if ($user && $motdepasse === $user['mot_de_passe']) {
         $_SESSION['user'] = [
             'id' => $user['id'],
@@ -37,24 +35,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Connexion - Admin Dentics</title>
-    <link rel="stylesheet" href="../templates/css/login.css"> <!-- si tu as un style -->
+    <title>Connexion - Dentics Admin</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-    <h2>Connexion Administrateur</h2>
+<body class="login-body">
+    <div class="login-container">
+        <h2>Connexion Administrateur</h2>
 
-    <?php if ($error): ?>
-        <p style="color: red;"><?= $error ?></p>
-    <?php endif; ?>
+        <?php if ($error): ?>
+            <p class="login-error"><?= $error ?></p>
+        <?php endif; ?>
 
-    <form method="POST">
-        <label>Email :</label>
-        <input type="email" name="email" required>
+        <form method="POST">
+            <label for="email">Email :</label>
+            <input type="email" name="email" required>
 
-        <label>Mot de passe :</label>
-        <input type="password" name="motdepasse" required>
+            <label for="motdepasse">Mot de passe :</label>
+            <input type="password" name="motdepasse" required>
 
-        <button type="submit">Se connecter</button>
-    </form>
+            <button type="submit" class="btn">Se connecter</button>
+        </form>
+    </div>
 </body>
 </html>

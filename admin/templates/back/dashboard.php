@@ -11,7 +11,13 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'dentist') {
 
 <main>
     <section class="dashboard">
-        <h1>Tableau de Bord - Administration</h1>
+    <div class="dashboard-banner">
+    <img src="../../../images/image&.jpg" alt="Accueil Admin">
+    <h1 class="dashboard-title">Bienvenue sur l’espace Admin</h1>
+</div>
+
+</div>
+
         <p>Gérez les utilisateurs, les rendez-vous et consultez la FAQ.</p>
         <div class="dashboard-buttons">
             <a href="utilisateurs.php" class="btn">Gérer les Utilisateurs</a>

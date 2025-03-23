@@ -1,5 +1,5 @@
 <footer>
-        <p>&copy; 2024 Dentics - Tous droits réservés.</p>
-    </footer>
+    <p>&copy; <?= date("Y") ?> Dentics - Tous droits réservés.</p>
+</footer>
 </body>
 </html>
