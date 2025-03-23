@@ -17,7 +17,7 @@
                 <li><a href="disponibilites.php">Disponibilités</a></li>
                 <li><a href="messages.php">Messages</a></li>
                 <li><a href="faq.php">FAQ</a></li>
-                <li><a href="logout.php">Déconnexion</a></li>
-            </ul>
+                <li><a href="../../control/logout.php">Déconnexion</a></li>
+                </ul>
         </nav>
     </header>

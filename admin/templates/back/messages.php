@@ -1,15 +1,14 @@
 <?php
-require_once __DIR__ . '/../../model/MessageContact.php';
+session_start();
+require_once __DIR__ . '/../../model/MessageContactManager.php';
+require_once __DIR__ . '/../../class/MessageContact.php';
+
+use Admin\Model\MessageContactManager;
+
 include 'header.php';
 
-use Admin\Model\MessageContact;
-
-try {
-    $messages = MessageContact::getAll();
-} catch (PDOException $e) {
-    echo "<p>Erreur lors de la récupération des messages : " . $e->getMessage() . "</p>";
-    $messages = [];
-}
+$manager = new MessageContactManager();
+$messages = $manager->getAllMessages();
 ?>
 
 <main>
@@ -32,11 +31,11 @@ try {
                 <tbody>
                     <?php foreach ($messages as $msg): ?>
                         <tr>
-                            <td><?= htmlspecialchars($msg->nom) ?></td>
-                            <td><?= htmlspecialchars($msg->email) ?></td>
-                            <td><?= nl2br(htmlspecialchars($msg->message)) ?></td>
-                            <td><?= $msg->date_envoi ?></td>
-                            <td><?= $msg->heure_envoi ?></td>
+                            <td><?= htmlspecialchars($msg->__get('nom')) ?></td>
+                            <td><?= htmlspecialchars($msg->__get('email')) ?></td>
+                            <td><?= nl2br(htmlspecialchars($msg->__get('message'))) ?></td>
+                            <td><?= $msg->__get('date_envoi') ?></td>
+                            <td><?= $msg->__get('heure_envoi') ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
