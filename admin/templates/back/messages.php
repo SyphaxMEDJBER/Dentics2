@@ -36,6 +36,10 @@ $messages = $manager->getAllMessages();
                             <td><?= nl2br(htmlspecialchars($msg->__get('message'))) ?></td>
                             <td><?= $msg->__get('date_envoi') ?></td>
                             <td><?= $msg->__get('heure_envoi') ?></td>
+                            <td>
+    <a href="mailto:<?= $msg->__get('email') ?>?subject=Réponse à votre message Dentics&body=Bonjour <?= $msg->__get('nom') ?>," class="btn">📧 Répondre</a>
+</td>
+
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

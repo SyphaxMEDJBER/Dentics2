@@ -1,5 +1,3 @@
 <?php
-// Redirige vers le login admin
-header("Location: templates/login.php");
+header("Location: admin/templates/back/login.php");
 exit();
-?>
