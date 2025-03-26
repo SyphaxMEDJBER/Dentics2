@@ -1,10 +1,6 @@
 <?php 
-session_start();
 
-if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'dentist') {
-    header("Location: login.php");
-    exit();
-}
+    
 include 'header.php'; ?>
 
 <main>

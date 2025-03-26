@@ -10,7 +10,7 @@ class ConnexionDB {
     public static function getInstance(): PDO {
         if (self::$instance === null) {
             try {
-                $host = 'pedago.univ-avignon.fr';
+                $host = 'pedago01c.univ-avignon.fr';//01c
                 $port = '5432';
                 $dbname = 'etd';
                 $user = 'uapv2500230';

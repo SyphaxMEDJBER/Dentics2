@@ -1,7 +1,5 @@
 <?php
-session_start();
 require_once __DIR__ . '/../model/ConnexionDB.php';
-
 use Admin\Model\ConnexionDB;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -15,17 +13,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($user && $motdepasse === $user['mot_de_passe']) {
-        $_SESSION['user'] = [
-            'id' => $user['id'],
-            'nom' => $user['nom'],
-            'email' => $user['email'],
-            'role' => $user['role']
-        ];
-        header("Location: ../templates/back/dashboard.php");
+        // Connexion réussie → redirection avec données dans l'URL
+        header("Location: ../templates/back/dashboard.php?nom=" . urlencode($user['nom']) . "&id=" . $user['id']);
         exit();
     } else {
-        $_SESSION['login_error'] = "Email ou mot de passe incorrect.";
-        header("Location: ../templates/back/login.php");
+        // Redirection vers login avec message d’erreur
+        header("Location: ../templates/back/login.php?error=1");
         exit();
     }
 }
