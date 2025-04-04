@@ -8,14 +8,21 @@ require_once __DIR__ . '/../class/RendezVous.php';
 $db = ConnexionDB::getInstance();
 
 use PDO;
-
+/**
+ * Summary of RendezVousManager
+ */
 class RendezVousManager {
     private PDO $db;
-
+    /**
+     * Summary of __construct
+     */
     public function __construct() {
         $this->db = ConnexionDB::getInstance();
     }
-
+    /**
+     * Summary of getAll
+     * @return RendezVous[]
+     */
     public function getAll(): array {
         $liste = [];
 
