@@ -3,10 +3,15 @@ namespace Admin\Model;
 
 use PDO;
 use PDOException;
-
+/**
+ * Summary of ConnexionDB
+ */
 class ConnexionDB {
     private static ?PDO $instance = null;
-
+    /**
+     * Summary of getInstance
+     * @return PDO|null
+     */
     public static function getInstance(): PDO {
         if (self::$instance === null) {
             try {
