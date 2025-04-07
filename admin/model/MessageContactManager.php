@@ -4,22 +4,25 @@ namespace Admin\Model;
 require_once 'ConnexionDB.php';
 require_once __DIR__ . '/../class/MessageContact.php';
 
-
 use PDO;
+
 /**
- * Summary of MessageContactManager
+ * Classe permettant la gestion des messages de contact dans la base de données.
  */
 class MessageContactManager {
     private PDO $db;
+
     /**
-     * Summary of __construct
+     * Initialise la connexion à la base de données via ConnexionDB.
      */
     public function __construct() {
         $this->db = ConnexionDB::getInstance();
     }
+
     /**
-     * Summary of getAllMessages
-     * @return MessageContact[]
+     * Récupère tous les messages de contact enregistrés en base, triés par date et heure d'envoi.
+     *
+     * @return MessageContact[] Liste des objets MessageContact
      */
     public function getAllMessages(): array {
         $messages = [];
