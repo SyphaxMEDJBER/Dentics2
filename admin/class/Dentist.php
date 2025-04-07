@@ -9,10 +9,10 @@ require_once 'Utilisateur.php';
 class Dentist extends Utilisateur {
     /**
      * Summary of __construct
-     * @param mixed $id
-     * @param mixed $nom
-     * @param mixed $email
-     * @param mixed $motDePasse
+     * @param mixed $id id de dentiste
+     * @param mixed $nom nom de dentiste
+     * @param mixed $email  mail de dentiste
+     * @param mixed $motDePasse mot de passe de cnx 
      */
  
      public function __construct($id = 0, $nom = "", $email = "", $motDePasse = "") {
@@ -20,7 +20,7 @@ class Dentist extends Utilisateur {
     }
     /**
      * Summary of __toString
-     * @return string
+     * @return string la chaine qui represente le dentiste 
      */
     public function __toString(): string {
         return parent::__toString() . " (Dentiste)";
