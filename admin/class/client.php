@@ -12,10 +12,11 @@ class Client extends Utilisateur {
     private string $photo;
     /**
      * Summary of __construct
-     * @param mixed $id
-     * @param mixed $nom
-     * @param mixed $email
-     * @param mixed $motDePasse
+     * Constructeur de la classe Client.
+     * @param mixed $id l'id du client
+     * @param mixed $nom nom du client
+     * @param mixed $email adresse mail
+     * @param mixed $motDePasse mot de passe de connexion
      * @param mixed $photo
      */
     public function __construct($id = 0, $nom = "", $email = "", $motDePasse = "", $photo = "") {
@@ -24,7 +25,9 @@ class Client extends Utilisateur {
     }
     /**
      * Summary of __get
-     * @param mixed $prop
+     * Accesseur magique pour obtenir une propriété de l'objet Client.
+     * @param string $prop Nom de la propriété demandée
+     * @return mixed Valeur de la propriété demandé
      */
     public function __get($prop) {
         if ($prop === "photo") return $this->photo;
@@ -32,8 +35,9 @@ class Client extends Utilisateur {
     }
     /**
      * Summary of __set
-     * @param mixed $prop
-     * @param mixed $val
+     *  Modifie dynamiquement la valeur d'une propriété de l'objet Client.
+     * @param mixed $prop Nom de la propriété à modifier
+     * @param mixed $val Nouvelle valeur à assigner à la propriété
      * @return void
      */
     public function __set($prop, $val) {
@@ -42,7 +46,7 @@ class Client extends Utilisateur {
     }
     /**
      * Summary of __toString
-     * @return string
+     * @return string la chaine qui decrit le clients 'ses attributs'
      */
     public function __toString(): string {
         return parent::__toString() . ", Photo : {$this->photo}";
