@@ -1,6 +1,11 @@
 <?php
-// Récupérer le nom depuis l'URL (sécurisé avec htmlspecialchars)
-$nom = $_GET['nom'] ?? 'Invité';
+session_start();
+if (!isset($_SESSION['admin_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+$nom = $_SESSION['admin_nom'] ?? 'Invité';
 ?>
 
 <?php include 'header.php'; ?>
@@ -8,7 +13,7 @@ $nom = $_GET['nom'] ?? 'Invité';
 <main>
     <section class="dashboard">
         <div class="dashboard-banner">
-            <h1 class="dashboard-title">Bienvenue, <?= htmlspecialchars($nom) ?> !</h1>
+            <h1 class="dashboard-title">Bienvenue, Dr <?= htmlspecialchars($nom) ?> !</h1>
         </div>
 
         <p>Gérez les utilisateurs, les rendez-vous et consultez la FAQ.</p>

@@ -1,5 +1,11 @@
 <?php
+
 session_start();
+if (!isset($_SESSION['admin_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
 require_once __DIR__ . '/../../model/MessageContactManager.php';
 require_once __DIR__ . '/../../class/MessageContact.php';
 

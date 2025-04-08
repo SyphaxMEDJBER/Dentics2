@@ -1,8 +1,14 @@
 <?php
+session_start();
+if (!isset($_SESSION['admin_id'])) {
+    header("Location: login.php");
+    exit();
+}
 require_once __DIR__ . '/../../model/DisponibiliteManager.php';
 require_once __DIR__ . '/../../class/Disponibilite.php';
 
 use Admin\Model\DisponibiliteManager;
+
 
 include 'header.php';
 
