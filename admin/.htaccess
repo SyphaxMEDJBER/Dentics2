@@ -1,0 +1,24 @@
+RewriteEngine On
+RewriteBase /Dentics2/admin/
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Pages principales
+RewriteRule ^dashboard/?$ templates/back/dashboard.php [L]
+RewriteRule ^utilisateurs/?$ templates/back/utilisateurs.php [L]
+RewriteRule ^rendez-vous/?$ templates/back/rendez_vous.php [L]
+RewriteRule ^disponibilites/?$ templates/back/disponibilites.php [L]
+RewriteRule ^messages/?$ templates/back/messages.php [L]
+RewriteRule ^faq/?$ templates/back/faq.php [L]
+RewriteRule ^login/?$ templates/back/login.php [L]
+RewriteRule ^logout/?$ control/logout.php [L]
+
+# Utilisateur (ajout / suppression)
+RewriteRule ^utilisateur/add/?$ control/utilisateur_control.php [QSA,L]
+RewriteRule ^utilisateur/delete/([0-9]+)/?$ control/utilisateur_control.php?id=$1 [QSA,L]
+
+# Rendez-vous (confirm / cancel)
+RewriteRule ^rendez-vous/confirm/([0-9]+)/?$ control/rendez_vous_control.php?action=confirmer&id=$1 [QSA,L]
+RewriteRule ^rendez-vous/cancel/([0-9]+)/?$ control/rendez_vous_control.php?action=annuler&id=$1 [QSA,L]
+RewriteRule ^mentions-legales/?$ templates/back/mentions_legales.php [L]

@@ -1,5 +1,7 @@
 <?php
 session_start();
+$nom = $_SESSION['admin_nom'] ?? ($_COOKIE['nom_admin'] ?? 'Invité');
+
 if (!isset($_SESSION['admin_id'])) {
     header("Location: login.php");
     exit();
@@ -18,9 +20,10 @@ $nom = $_SESSION['admin_nom'] ?? 'Invité';
 
         <p>Gérez les utilisateurs, les rendez-vous et consultez la FAQ.</p>
         <div class="dashboard-buttons">
-            <a href="utilisateurs.php" class="btn">Gérer les Utilisateurs</a>
-            <a href="rendez_vous.php" class="btn">Gérer les Rendez-vous</a>
-            <a href="faq.php" class="btn">FAQ</a>
+        <a href="/Dentics2/admin/utilisateurs" class="btn">Gérer les Utilisateurs</a>
+        <a href="/Dentics2/admin/rendez-vous" class="btn">Gérer les Rendez-vous</a>
+        <a href="/Dentics2/admin/faq" class="btn">FAQ</a>
+
         </div>
     </section>
 </main>
