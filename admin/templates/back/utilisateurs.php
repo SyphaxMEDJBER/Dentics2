@@ -1,9 +1,14 @@
 <?php
 session_start();
 if (!isset($_SESSION['admin_id'])) {
-    header("Location: login.php");
+    header("Location: /Dentics2/admin/login");
     exit();
 }
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+$csrf = $_SESSION['csrf_token'];
+
 require_once __DIR__ . '/../../model/UtilisateurManager.php';
 require_once __DIR__ . '/../../class/Utilisateur.php';
 
@@ -18,10 +23,11 @@ $utilisateurs = $manager->getAll();
 <main>
     <section class="utilisateurs">
         <h2>Ajouter un dentiste</h2>
-        <form method="POST" action="../../control/utilisateur_control.php">
+        <form method="POST" action="/Dentics2/admin/utilisateur/add">
             <label>Nom : <input type="text" name="nom" required></label>
             <label>Email : <input type="email" name="email" required></label>
             <label>Mot de passe : <input type="text" name="motdepasse" required></label>
+            <input type="hidden" name="csrf_token" value="<?= $csrf ?>">
             <button type="submit" class="btn">Ajouter</button>
         </form>
 
@@ -49,7 +55,7 @@ $utilisateurs = $manager->getAll();
                             <td><?= $u->__get('role') ?></td>
                             <td>
                                 <?php if ($u->__get('role') === 'client'): ?>
-                                    <a href="../../control/utilisateur_control.php?id=<?= $u->__get('id') ?>"
+                                    <a href="/Dentics2/admin/utilisateur/delete/<?= $u->__get('id') ?>?csrf_token=<?= $csrf ?>"
                                        onclick="return confirm('Confirmer la suppression de ce client ?')">🗑 Supprimer</a>
                                 <?php else: ?>
                                     -
