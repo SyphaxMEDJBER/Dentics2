@@ -2,6 +2,7 @@
 session_start();
 $error = $_SESSION['login_error'] ?? '';
 unset($_SESSION['login_error']);
+$root = "/Dentics2/admin";
 ?>
 
 <!DOCTYPE html>
@@ -94,7 +95,7 @@ unset($_SESSION['login_error']);
                 <p class="login-error"><?= $error ?></p>
             <?php endif; ?>
 
-            <form method="POST" action="../../control/login_control.php">
+            <form method="POST" action="<?= $root ?>/control/login_control.php">
                 <label>Email :</label>
                 <input type="email" name="email" required>
 

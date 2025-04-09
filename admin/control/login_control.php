@@ -1,5 +1,7 @@
 <?php
 session_start(); // DÉPLACÉ EN HAUT
+$root = "/Dentics2/admin";
+
 
 require_once __DIR__ . '/../model/UtilisateurManager.php';
 
@@ -16,7 +18,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Connexion réussie
         $_SESSION['admin_id'] = $user->__get('id');
         $_SESSION['admin_nom'] = $user->__get('nom');
-        header("Location: ../templates/back/dashboard.php");
+        setcookie("nom_admin", $user->__get('nom'), time() + (86400 * 7), "/"); // 7 jours
+        header("Location: $root/dashboard");
+
+
         exit();
     } else {
         $_SESSION['login_error'] = "Email ou mot de passe incorrect.";

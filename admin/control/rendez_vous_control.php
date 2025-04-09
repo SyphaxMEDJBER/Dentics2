@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require_once __DIR__ . '/../model/RendezVousManager.php';
 
 use Admin\Model\RendezVousManager;
@@ -6,6 +8,10 @@ use Admin\Model\RendezVousManager;
 $manager = new RendezVousManager();
 
 if (isset($_GET['action'], $_GET['id'])) {
+    if (!isset($_GET['csrf_token']) || $_GET['csrf_token'] !== $_SESSION['csrf_token']) {
+        die("❌ CSRF token invalide.");
+    }
+
     $id = (int) $_GET['id'];
     $action = $_GET['action'];
 
@@ -16,17 +22,6 @@ if (isset($_GET['action'], $_GET['id'])) {
     }
 }
 
-// 2. Marquer la disponibilité comme réservée
-$updateDispo = $db->prepare("UPDATE disponibilite 
-    SET est_reserve = TRUE 
-    WHERE id_dentist = :dentist 
-      AND date_dispo = :date 
-      AND heure_dispo = :heure");
-$updateDispo->execute([
-    'dentist' => $id_dentist,
-    'date' => $date,
-    'heure' => $heure
-]);
-
-header("Location: ../templates/back/rendez_vous.php");
+// Redirection vers l'URL propre avec rewriting
+header("Location: /Dentics2/admin/rendez-vous");
 exit();

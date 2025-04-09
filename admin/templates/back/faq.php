@@ -7,7 +7,6 @@ if (!isset($_SESSION['admin_id'])) {
     
 include 'header.php'; ?>
 
-
 <main>
     <section class="faq-container">
         <h2>Foire aux questions</h2>
@@ -32,11 +31,33 @@ include 'header.php'; ?>
                 Rendez-vous dans "Utilisateurs" puis cliquez sur l'icône 🗑 à côté du client à supprimer.
             </div>
         </div>
+
+        <!-- Questions supplémentaires -->
+        <div class="faq-item">
+            <button class="faq-question"> Comment ajouter une disponibilité ?</button>
+            <div class="faq-answer">
+                Dans la section "Disponibilités", sélectionnez la date et l'heure, puis cliquez sur "Ajouter".
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question"> Où consulter les messages des patients ?</button>
+            <div class="faq-answer">
+                Cliquez sur l'onglet "Messages" pour afficher tous les messages reçus via le formulaire de contact.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question"> Comment se déconnecter ?</button>
+            <div class="faq-answer">
+                Cliquez simplement sur "Déconnexion" dans le menu du haut pour quitter la session administrateur.
+            </div>
+        </div>
+
     </section>
 </main>
 
-
-    <script>
+<script>
 document.querySelectorAll('.faq-question').forEach(button => {
   button.addEventListener('click', () => {
     const answer = button.nextElementSibling;
@@ -44,7 +65,5 @@ document.querySelectorAll('.faq-question').forEach(button => {
   });
 });
 </script>
-
-
 
 <?php include 'footer.php'; ?>

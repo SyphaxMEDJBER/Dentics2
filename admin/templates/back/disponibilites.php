@@ -4,24 +4,29 @@ if (!isset($_SESSION['admin_id'])) {
     header("Location: login.php");
     exit();
 }
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+$csrf = $_SESSION['csrf_token'];
+
 require_once __DIR__ . '/../../model/DisponibiliteManager.php';
 require_once __DIR__ . '/../../class/Disponibilite.php';
 
 use Admin\Model\DisponibiliteManager;
 
-
-include 'header.php';
-
 $manager = new DisponibiliteManager();
 $disponibilites = $manager->getAll();
+
+include 'header.php';
 ?>
 
 <main>
     <section class="disponibilites">
         <h2>Ajouter une disponibilité</h2>
-        <form method="POST" action="../../control/disponibilites_control.php">
+        <form method="POST" action="/Dentics2/admin/control/disponibilites_control.php">
             <label>Date : <input type="date" name="date" required></label>
             <label>Heure : <input type="time" name="heure" required></label>
+            <input type="hidden" name="csrf_token" value="<?= $csrf ?>">
             <button type="submit">Ajouter</button>
         </form>
 
@@ -45,7 +50,7 @@ $disponibilites = $manager->getAll();
                         <td><?= $d->__get('est_reserve') ? 'Oui' : 'Non' ?></td>
                         <td>
                             <?php if ((bool)$d->__get('est_reserve') === false): ?>
-                                <a href="../../control/disponibilites_control.php?delete=<?= $d->__get('id_dispo') ?>" onclick="return confirm('Confirmer la suppression ?')">🗑 Supprimer</a>
+                                <a href="/Dentics2/admin/control/disponibilites_control.php?delete=<?= $d->__get('id_dispo') ?>&csrf_token=<?= $csrf ?>" onclick="return confirm('Confirmer la suppression ?')">🗑 Supprimer</a>
                             <?php else: ?>
                                 Non supprimable
                             <?php endif; ?>

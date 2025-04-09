@@ -4,6 +4,11 @@ if (!isset($_SESSION['admin_id'])) {
     header("Location: login.php");
     exit();
 }
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+$csrf = $_SESSION['csrf_token'];
+
 require_once __DIR__ . '/../../model/RendezVousManager.php';
 require_once __DIR__ . '/../../class/RendezVous.php';
 
@@ -47,8 +52,8 @@ $rdvs = $manager->getAll();
                             <td><?= $rdv->__get('heure_rdv') ?></td>
                             <td><?= $rdv->__get('statut') ?></td>
                             <td>
-                                <a href="../../control/rendez_vous_control.php?action=confirmer&id=<?= $rdv->__get('id_rdv') ?>">✔️</a>
-                                <a href="../../control/rendez_vous_control.php?action=annuler&id=<?= $rdv->__get('id_rdv') ?>">🗑</a>
+                                <a href="/Dentics2/admin/rendez-vous/confirm/<?= $rdv->__get('id_rdv') ?>?csrf_token=<?= $csrf ?>">✔️</a>
+                                <a href="/Dentics2/admin/rendez-vous/cancel/<?= $rdv->__get('id_rdv') ?>?csrf_token=<?= $csrf ?>">🗑</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

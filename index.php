@@ -1,3 +1,3 @@
 <?php
-header("Location: admin/templates/back/login.php");
+header("Location: /Dentics2/admin/login");
 exit();
