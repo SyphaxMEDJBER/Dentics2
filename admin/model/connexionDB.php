@@ -18,9 +18,8 @@ class ConnexionDB {
                 $host = 'pedago01c.univ-avignon.fr';//01c
                 $port = '5432';
                 $dbname = 'etd';
-                $user = 'uapv2500230';
-                $password = 'f23WdW';
-
+                $user = 'caché pour rendre le depo public';
+                $password = 'caché pour rendre le depo public ';
                 $dsn = "pgsql:host=$host;port=$port;dbname=$dbname";
                 self::$instance = new PDO($dsn, $user, $password);
                 self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
