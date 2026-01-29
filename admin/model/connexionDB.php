@@ -15,9 +15,9 @@ class ConnexionDB {
     public static function getInstance(): PDO {
         if (self::$instance === null) {
             try {
-                $host = 'pedago01c.univ-avignon.fr';//01c
-                $port = '5432';
-                $dbname = 'etd';
+                $host = 'caché pour rendre le depo public';//01c
+                $port = 'caché pour rendre le depo public';
+                $dbname = 'caché pour rendre le depo public';
                 $user = 'caché pour rendre le depo public';
                 $password = 'caché pour rendre le depo public ';
                 $dsn = "pgsql:host=$host;port=$port;dbname=$dbname";
